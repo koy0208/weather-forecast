@@ -25,7 +25,7 @@ const WeatherCard = ({
   const getWeatherIcon = (weather: string) => {
     if (weather.includes('晴')) {
       return '☀️';
-    } else if (weather.includes('曇')) {
+    } else if (weather.includes('くもり')) {
       return '☁️';
     } else if (weather.includes('雨')) {
       return '🌧️';
