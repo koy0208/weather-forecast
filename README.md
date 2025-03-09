@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# 天気予報アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+気象庁APIを使用した、モダンなデザインの天気予報アプリです。
 
-Currently, two official plugins are available:
+## 機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 日本の主要都道府県の天気予報表示
+- 現在の天気と今後の予報を表示
+- レスポンシブデザイン対応
+- 天気に応じたアイコン表示（晴れ☀️、曇り☁️、雨🌧️、雪❄️）
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React + TypeScript
+- Tailwind CSS（スタイリング）
+- 気象庁API（データソース）
+- Axios（APIリクエスト）
 
-- Configure the top-level `parserOptions` property like this:
+## プロジェクト構成
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+weather-app/
+  ├── src/
+  │    ├── components/
+  │    │    ├── WeatherCard.tsx（天気表示カード）
+  │    │    ├── SearchForm.tsx（検索フォーム）
+  │    │    └── ForecastList.tsx（予報リスト）
+  │    ├── hooks/
+  │    │    └── useWeatherAPI.ts（API連携カスタムフック）
+  │    ├── types/
+  │    │    └── jma.d.ts（気象庁API型定義）
+  │    ├── App.tsx（メインコンポーネント）
+  │    └── index.tsx（エントリーポイント）
+  └── docs/
+       ├── requirements.md（要件定義書）
+       └── design.md（設計書）
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 実装の特徴
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- カスタムフックを使用したAPI通信の分離
+- useCallbackとuseMemoによるパフォーマンス最適化
+- 依存配列の適切な管理によるレンダリング問題の解決
+- TypeScriptによる型安全性の確保
+- Tailwind CSSによるモダンなUIデザイン
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## 使い方
+
+### インストール
+
+```bash
+git clone https://github.com/yourusername/weather-app.git
+cd weather-app
+npm install
 ```
+
+### 開発サーバーの起動
+
+```bash
+npm start
+```
+
+ブラウザで http://localhost:3000 にアクセスすると、アプリが表示されます。
+
+### ビルド
+
+```bash
+npm run build
+```
+
+## API
+
+このアプリは気象庁の公開APIを使用しています。
+https://www.jma.go.jp/bosai/forecast/data/forecast/{都道府県コード}.json
+
+## ライセンス
+
+MIT
